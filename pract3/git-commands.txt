@@ -1,0 +1,51 @@
+
+# Step a: Initialize Git repository
+mkdir git-prac3
+cd git-prac3
+echo "print('Hello from main branch')" > app.py
+git init
+git add .
+git commit -m "Initial commit with basic app.py"
+
+# Add remote repository
+git remote add origin https://github.com/YOUR_USERNAME/git-prac3.git
+git branch -M main
+git push -u origin main
+
+# Step b: Branching and pull request
+git checkout -b feature/greet-user
+# Edit app.py to add greeting feature:
+# name = input("Enter your name: ")
+# print(f"Hello, {name}!")
+git add app.py
+git commit -m "Add user greeting feature"
+git push origin feature/greet-user
+
+# Step c: Simulate conflict
+# Branch A
+git checkout main
+git checkout -b feature/conflict-A
+# Edit app.py:
+# print("This is branch A")
+git add app.py
+git commit -m "Change message in branch A"
+git push origin feature/conflict-A
+
+# Branch B
+git checkout main
+git checkout -b feature/conflict-B
+# Edit app.py same line:
+# print("This is branch B")
+git add app.py
+git commit -m "Change message in branch B"
+git push origin feature/conflict-B
+
+# Merge branch A first via PR on GitHub
+# Then merge branch B via PR and resolve conflict:
+# <<<<<<< HEAD
+# print("This is branch A")
+# =======
+# print("This is branch B")
+# >>>>>>> feature/conflict-B
+# Resolved version:
+# print("This is the resolved version")
